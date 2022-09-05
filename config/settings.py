@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_scim',
+    'app',
+
+    # 'app.apps.AppConfig',
 ]
 
 MIDDLEWARE = [
@@ -47,7 +51,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_scim.middleware.SCIMAuthCheckMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = [
+    # Django default backend
+    'django.contrib.auth.backends.ModelBackend',
+    # used for SCIM integration
+    'oauth2_provider.backends.OAuth2Backend',
+]
+
+AUTH_USER_MODEL = 'app.User'
 
 ROOT_URLCONF = 'config.urls'
 
@@ -121,3 +135,14 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SCIM_SERVICE_PROVIDER = {
+    'NETLOC': 'localhost',
+    'AUTHENTICATION_SCHEMES': [
+        {
+            'type': 'oauth2',
+            'name': 'OAuth 2',
+            'description': 'Oauth 2 implemented with bearer token',
+        },
+    ],
+}
