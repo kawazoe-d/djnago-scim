@@ -54,12 +54,12 @@ MIDDLEWARE = [
     'django_scim.middleware.SCIMAuthCheckMiddleware',
 ]
 
-AUTHENTICATION_BACKENDS = [
-    # Django default backend
-    'django.contrib.auth.backends.ModelBackend',
-    # used for SCIM integration
-    'oauth2_provider.backends.OAuth2Backend',
-]
+# AUTHENTICATION_BACKENDS = [
+#     # Django default backend
+#     'django.contrib.auth.backends.ModelBackend',
+#     # used for SCIM integration
+#     'oauth2_provider.backends.OAuth2Backend',
+# ]
 
 AUTH_USER_MODEL = 'app.User'
 
